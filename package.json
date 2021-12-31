@@ -33,7 +33,7 @@
     "istanbul": "^1.0.0-alpha"
   },
   "dependencies": {
-    "@react-native-mapbox-gl/maps": "^7.0.6",
+    "@react-native-mapbox-gl/maps": "^8.5.0",
     "@turf/helpers": "^6.1.4"
   }
 }
