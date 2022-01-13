@@ -1,15 +1,26 @@
+import MapboxGL, { Logger } from '@react-native-mapbox-gl/maps';
 import React, { Component } from 'react';
-import { cleanUrl } from './helpers/utils'
+import { View } from 'react-native';
+import { CEDARMAPS_BASE_URL } from './constants/config';
 import {
-  DARK_STYLE_URL,
-  LIGHT_STYLE_URL,
-  LIGHT_RASTER_STYLE_URL,
-} from './constants/styles'
-import { CEDARMAPS_BASE_URL } from './constants/config'
-import { getToken } from './helpers/auth'
-import { View, Image, SafeAreaView, Platform } from 'react-native'
-import MapboxGL from '@react-native-mapbox-gl/maps';
+  DARK_STYLE_URL, LIGHT_RASTER_STYLE_URL, LIGHT_STYLE_URL
+} from './constants/styles';
+import { getToken } from './helpers/auth';
+import { cleanUrl } from './helpers/utils';
 
+// edit logging messages
+Logger.setLogCallback(log => {
+  const { message } = log;
+
+  // expected warnings - see https://github.com/mapbox/mapbox-gl-native/issues/15341#issuecomment-522889062
+  if (
+    message.match('Request failed due to a permanent error: Canceled') ||
+    message.match('Request failed due to a permanent error: Socket Closed')
+  ) {
+    return true;
+  }
+  return false;
+});
 MapboxGL.setAccessToken('pk.kdsevitantcaerspamradecsisiht')
 
 const styleMapper = {
@@ -81,14 +92,14 @@ class Map extends Component {
       attributionEnabled = { false }
       logoEnabled = { false }
       />
-      {
+      {/* {
         Platform.OS == 'android' ? 
         <Image source={require('./images/cedarmaps.png')} style={{marginHorizontal: 8, position:'absolute', bottom: 4, right: 0}}/>
         :
         <SafeAreaView style={{marginHorizontal: 8, position:'absolute', bottom: 0, right: 0}}>
         <Image source={require('./images/cedarmaps.png')} />
         </SafeAreaView>
-      }
+      } */}
       </>
       )
   }
